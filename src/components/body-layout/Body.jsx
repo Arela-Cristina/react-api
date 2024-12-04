@@ -3,12 +3,30 @@ import Tags from "../Tags/Tag.jsx";
 import Card from "./card/Card.jsx";
 import imgVuota from "../../assets/imagine-vuota.jpg";
 // import brawlStars from "../../assets/database/brawlStars.js";
+import axios from "axios";
 import { useState } from 'react';
+import { useEffect } from "react";
 
 
 const API_BASE_URI = "http://localhost:1311/"
 
 export default function Body() {
+
+  //chiamata Axios
+  function fetchPosts() {
+    axios.get(`${API_BASE_URI}posts`)
+      .then(res => {
+        console.log('array posts', res)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
+  //hook per fare que suceda qualcosa ogni volta che viene efettuata la chiama Axios
+  useEffect(() => {
+    fetchPosts()
+  }, [])
 
   //tag che stampiano sotto il header
   const tagTopics = [];
@@ -22,8 +40,6 @@ export default function Body() {
       }
     });
   });
-
-
 
   //state della struttura dati
   const [brawler, setBrawler] = useState([]);
