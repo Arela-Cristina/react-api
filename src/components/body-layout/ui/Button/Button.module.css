@@ -1,0 +1,19 @@
+.kawaiButton {
+  background-color: #6a8dec;
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.kawaiButton:hover {
+  background-color: #45b2e5;
+  transform: scale(1.05);
+}
