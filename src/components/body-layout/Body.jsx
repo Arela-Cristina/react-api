@@ -22,7 +22,7 @@ export default function Body() {
    name: '',
    tag: [], //perche i tag si trovano in un array
    tier: '',
-   class: '',
+   quality: '',
  });
 
   //chiamata Axios
@@ -86,18 +86,20 @@ export default function Body() {
   //GESTIONE INPUT SUBMIT
   function addBrawler(e) {
     e.preventDefault()
-    const newId = Math.max(...brawler.map(el => el.id), 0) + 1; //generare nuovo id
 
     const newBrawlerObject = {
-      id: newId,
       ...formData,
-      description: "This is a Desription",
-      thumb: imgVuota,
-      published: false
-    };
+    }
 
-    //nel nostro array, creiamo un nuovo array con il valore che ci arriva da Set Brawler
-    setBrawler([...brawler, newBrawlerObject])
+    axios.post(`${API_BASE_URI}posts`, newBrawlerObject)
+    .then(res =>{
+
+    }).catch(err =>{
+      console.error(err)
+    })
+
+    // //nel nostro array, creiamo un nuovo array con il valore che ci arriva da Set Brawler
+    // setBrawler([...brawler, newBrawlerObject])
   }
 
 
@@ -143,8 +145,8 @@ export default function Body() {
             {/* SELECT CLASS */}
             <div>
               <label htmlFor="class-select">Select Class:</label>
-              <select id="class-select" name="class" onChange={handleFormData}
-                value={formData.class}>
+              <select id="class-select" name="quality" onChange={handleFormData}
+                value={formData.quality}>
                 <option value="Assasin">Assassin</option>
                 <option value="Controller">Controller</option>
                 <option value="Sniper">Sniper</option>
