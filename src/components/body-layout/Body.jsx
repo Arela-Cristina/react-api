@@ -8,7 +8,8 @@ import { useState } from 'react';
 import { useEffect } from "react";
 
 
-const API_BASE_URI = "http://localhost:1311/"
+//main root server
+export const API_BASE_URI = "http://localhost:1311/"
 
 export default function Body() {
 

@@ -3,6 +3,7 @@ import Tags from "../../../components/Tags/Tag.jsx";
 import Button from "../ui/Button/Button.jsx";
 import DeletedButton from "../ui/Button/DeleteButton.jsx";
 import imgVuota from "../../../assets/imagine-vuota.jpg";
+import { API_BASE_URI } from "../Body.jsx";
 
 
 export default function Card({ thumb, title, description, id, published, tag, onDeleteBrawler }) {
@@ -13,7 +14,7 @@ export default function Card({ thumb, title, description, id, published, tag, on
       <div className={style.colThumb}>
         <img
           className={style.thumb}
-          src={published ? `src/assets/${thumb}` : imgVuota}
+          src={published ? API_BASE_URI + thumb : imgVuota}
           alt="Mandys candies"
         />
       </div>
