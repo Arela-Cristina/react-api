@@ -12,11 +12,24 @@ const API_BASE_URI = "http://localhost:1311/"
 
 export default function Body() {
 
+
+ //state della struttura dati
+ const [brawler, setBrawler] = useState([]);
+
+ //variabile di stato per il form, actualizamos las propiedades...
+ const [formData, setFormData] = useState({
+   name: '',
+   tag: [], //perche i tag si trovano in un array
+   tier: '',
+   class: '',
+ });
+
   //chiamata Axios
   function fetchPosts() {
     axios.get(`${API_BASE_URI}posts`)
       .then(res => {
         console.log('array posts', res)
+        setBrawler(res.data)
       })
       .catch(err => {
         console.error(err)
@@ -41,17 +54,7 @@ export default function Body() {
     });
   });
 
-  //state della struttura dati
-  const [brawler, setBrawler] = useState([]);
-
-  //variabile di stato per il form, actualizamos las propiedades...
-  const [formData, setFormData] = useState({
-    name: '',
-    tag: [], //perche i tag si trovano in un array
-    tier: '',
-    class: '',
-  });
-
+ 
   //funzione che collega  el atributo name del form con la proprieta value del oggeto che contiene ogni select, input, check box del form
   function handleFormData(e) {
     const { name, type, checked, value } = e.target; //destrutturiamo
