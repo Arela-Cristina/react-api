@@ -12,18 +12,16 @@ import { useEffect } from "react";
 export const API_BASE_URI = "http://localhost:1311/"
 
 export default function Body() {
+  //state della struttura dati
+  const [brawler, setBrawler] = useState([]);
 
-
- //state della struttura dati
- const [brawler, setBrawler] = useState([]);
-
- //variabile di stato per il form, actualizamos las propiedades...
- const [formData, setFormData] = useState({
-   name: '',
-   tag: [], //perche i tag si trovano in un array
-   tier: '',
-   quality: '',
- });
+  //variabile di stato per il form, actualizamos las propiedades...
+  const [formData, setFormData] = useState({
+    name: '',
+    tag: [], //perche i tag si trovano in un array
+    tier: '',
+    quality: '',
+  });
 
   //chiamata Axios
   function fetchPosts() {
@@ -44,8 +42,6 @@ export default function Body() {
 
   //tag che stampiano sotto il header
   const tagTopics = [];
-  // console.log(tagTopics);
-
   [].forEach((el) => {
     // console.log("ecco tutti tipi di  tag", el.tag);
     el.tag.forEach((val) => {
@@ -55,7 +51,7 @@ export default function Body() {
     });
   });
 
- 
+
   //funzione che collega  el atributo name del form con la proprieta value del oggeto che contiene ogni select, input, check box del form
   function handleFormData(e) {
     const { name, type, checked, value } = e.target; //destrutturiamo
@@ -90,18 +86,23 @@ export default function Body() {
     const newBrawlerObject = {
       ...formData,
     }
+    console.log(newBrawlerObject) //dentro ...form data ce il nuovo oggetto che ci arriva
 
     axios.post(`${API_BASE_URI}posts`, newBrawlerObject)
-    .then(res =>{
+      .then(res => {
+        setBrawler((currentBrawlers) => [...currentBrawlers, res.data]);
 
-    }).catch(err =>{
-      console.error(err)
-    })
-
-    // //nel nostro array, creiamo un nuovo array con il valore che ci arriva da Set Brawler
-    // setBrawler([...brawler, newBrawlerObject])
+        setFormData({ //pulire il form
+          name: '',
+          tag: [],
+          tier: '',
+          quality: '',
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
-
 
   //GESTIONE DELETE
   function deleteBrawler(id) {
